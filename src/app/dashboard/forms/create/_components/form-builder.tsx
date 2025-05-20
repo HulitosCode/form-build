@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { FormEvent, useState } from "react";
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from "uuid";
 
 const FormBuilder = () => {
   const [form, setForm] = useState({
@@ -19,17 +19,17 @@ const FormBuilder = () => {
     ],
   });
 
-const addQuestion = () => {
+  const addQuestion = () => {
     setForm((prev) => ({
-        ...prev,
-        questions: [...prev.questions, { id: uuidv4(), text: ''}]
-    }))
-}
+      ...prev,
+      questions: [...prev.questions, { id: uuidv4(), text: "" }],
+    }));
+  };
 
-const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     //Evita que o navegador recarregue sempre que submeter os dados
-    e.preventDefault()
-}
+    e.preventDefault();
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
@@ -78,18 +78,22 @@ const handleSubmit = (e: FormEvent) => {
                 remove
               </Button>
             </div>
-            <Textarea id={`Question-${index}`} value={question.text} 
-            onChange={(e) => {}}
-            placeholder="Enter your question"
-            className="mt-1"
+            <Textarea
+              id={`Question-${index}`}
+              value={question.text}
+              onChange={(e) => {}}
+              placeholder="Enter your question"
+              className="mt-1"
             />
           </div>
         ))}
       </div>
 
       <div className="flex justify-end gap-2">
-        <Button type="button" variant='outline' onClick={() => {}}>Cancel</Button>
-        <Button type='submit'>Save</Button>
+        <Button type="button" variant="outline" onClick={() => {}}>
+          Cancel
+        </Button>
+        <Button type="submit">Save</Button>
       </div>
     </form>
   );
