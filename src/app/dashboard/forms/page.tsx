@@ -1,4 +1,10 @@
-const Forms = () => {
+import { auth } from "@clerk/nextjs/server";
+
+const Forms = async () => {
+  const { userId, redirectToSignIn } = await auth();
+
+  if (!userId) return redirectToSignIn();
+
   return (
     <div className="space-y-6">
       <div>

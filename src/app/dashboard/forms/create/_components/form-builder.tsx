@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 
 const FormBuilder = () => {
-const router = useRouter()
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     title: "",
@@ -65,9 +65,30 @@ const router = useRouter()
 
     try {
       setIsSubmitting(true);
-      // Simulate the delay
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-    } catch {
+      const response = await fetch("/api/forms", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        const error = await response.text();
+        throw new Error(error);
+      }
+
+      const data = await response.json();
+      toast.success("Form created!", {
+        description: "Your form has been saved successfully",
+      });
+      router.push(`/dashboard/forms/${data.id}`);
+      router.refresh();
+    } catch (error) {
+      console.error("Error saving form:", error);
+      toast.error("Error!", {
+        description: "Something went wrong while saving your form",
+      });
     } finally {
       setIsSubmitting(false);
     }
