@@ -39,9 +39,13 @@ const EditForm = async ({ params }: { params: Promise<{ formId: string}>}) => {
                 </p>
             </div>
 
-            <FormBuilder initialData={form} isEditing />
+            <FormBuilder initialData={{
+                id: form.id,
+                title: form.title,
+                description: form.description || '',
+                questions: form.questions
+            }} isEditing />
         </div>
     )
-}
- 
+} 
 export default EditForm;
