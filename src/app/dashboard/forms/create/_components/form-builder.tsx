@@ -9,13 +9,28 @@ import { FormEvent, useState } from "react";
 import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 
-const FormBuilder = () => {
+type Question = {
+  id: string;
+  text: string;
+};
+
+type FormBuilderProps = {
+  initialData: {
+    id: string;
+    title: string;
+    description: string;
+    questions: Question[];
+  };
+  isEditing?: boolean;
+};
+
+const FormBuilder = ({ initialData, isEditing = false }: FormBuilderProps) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
-    title: "",
-    description: "",
-    questions: [
+    title: initialData?.title || "",
+    description: initialData?.description || "",
+    questions: initialData?.questions || [
       {
         id: "1",
         text: "",
@@ -65,8 +80,12 @@ const FormBuilder = () => {
 
     try {
       setIsSubmitting(true);
-      const response = await fetch("/api/forms", {
-        method: "POST",
+
+      const url = isEditing ? `/api/forms/${initialData?.id}` : "/api/forms";
+      const method = isEditing ? "PUT" : "POST";
+
+      const response = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -79,7 +98,7 @@ const FormBuilder = () => {
       }
 
       const data = await response.json();
-      toast.success("Form created!", {
+      toast.success(isEditing ? "Form updated!" : "Form created!", {
         description: "Your form has been saved successfully",
       });
       router.push(`/dashboard/forms/${data.id}`);
@@ -163,7 +182,11 @@ const FormBuilder = () => {
           Cancel
         </Button>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Saving..." : "Create form"}
+          {isSubmitting
+            ? "Saving..."
+            : isEditing
+              ? "Update Form"
+              : "Create form"}
         </Button>
       </div>
     </form>

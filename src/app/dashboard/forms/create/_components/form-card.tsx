@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
+import DeleteFormButton from "./delete-form-button";
 
 type FormCardProps = {
   id: string;
@@ -46,9 +47,7 @@ const FormCard = ({
         <Button asChild variant="outline" className="flex-1">
           <Link href={`/dashboard/forms/${id}/responses`}>Responses</Link>
         </Button>
-        <Button variant="destructive" className="flex-1">
-          Delete
-        </Button>
+        <DeleteFormButton formId={id} />
       </CardFooter>
     </Card>
   );
