@@ -19,7 +19,7 @@ type FormPreviewProps = {
 };
 
 const FormPreview = ({ form }: FormPreviewProps) => {
-    const router = useRouter()
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [answers, setAnswers] = useState(
@@ -59,24 +59,24 @@ const FormPreview = ({ form }: FormPreviewProps) => {
       });
 
       if (!response.ok) {
-        throw new Error(await response.text())
+        throw new Error(await response.text());
       }
 
-      toast.success('Response submitted!', {
-        description: 'Thank you for completing this form.'
-      })
+      toast.success("Response submitted!", {
+        description: "Thank you for completing this form.",
+      });
       // Rest form
-      setAnswers(form.questions.map((q) => ({ questionId: q.id, text: ''})))
-      setName('')
-      setEmail('')
+      setAnswers(form.questions.map((q) => ({ questionId: q.id, text: "" })));
+      setName("");
+      setEmail("");
 
       // Redirect to thank you page or back to home
       router.push("/");
-    } catch(error) {
-        console.error('Error submitting form:', error)
-        toast.error('Error', {
-            description: 'Something went wrong while submitting your response.'
-        })
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Error", {
+        description: "Something went wrong while submitting your response.",
+      });
     }
   };
 
