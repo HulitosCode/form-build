@@ -82,19 +82,18 @@ const FormDetails = async ({
       </Card>
 
       <div className="space-y-4">
-        <h2 className="te">
-          <div className="space-y-">
-            {form.questions.map((question, index) => (
-              <Card key={question.id}>
-                <CardContent className="p-4">
-                  <p className="font-medium">
-                    {index + 1} . {question.text}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </h2>
+        <h2 className="text-xl font-bold">Questions</h2>
+        <div className="space-y-2">
+          {form.questions.map((question, index) => (
+            <Card key={question.id}>
+              <CardContent className="p-4">
+                <p className="font-medium">
+                  {index + 1} . {question.text}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   );

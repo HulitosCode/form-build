@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,7 +23,9 @@ type FormListProps = {
 const FormList = ({ forms }: FormListProps) => {
   const [searchValue, setSearchValue] = useState<string>("");
 
-  const filteredForms = forms.filter(form => form.title.toLowerCase().includes(searchValue.toLowerCase()))
+  const filteredForms = forms.filter((form) =>
+    form.title.toLowerCase().includes(searchValue.toLowerCase()),
+  );
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
@@ -34,26 +36,28 @@ const FormList = ({ forms }: FormListProps) => {
           className="max-w-sm"
         />
         <Button asChild>
-            <Link href='/dashboard/forms/create'>Create Form</Link>
+          <Link href="/dashboard/forms/create">Create Form</Link>
         </Button>
       </div>
 
       {filteredForms.length === 0 ? (
         <div className="text-center py-8">
-            <p className="text-gray-500">No Forms found. Create your first form!</p>
+          <p className="text-gray-500">
+            No Forms found. Create your first form!
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredForms.map((form) => (
-                <FormCard
-                key={form.id}
-                id={form.id}
-                title={form.title}
-                description={form.description}
-                responsesCount={form._count.responses}
-                createdAt={form.createdAt}
-                />
-            ))}
+          {filteredForms.map((form) => (
+            <FormCard
+              key={form.id}
+              id={form.id}
+              title={form.title}
+              description={form.description}
+              responsesCount={form._count.responses}
+              createdAt={form.createdAt}
+            />
+          ))}
         </div>
       )}
     </div>
