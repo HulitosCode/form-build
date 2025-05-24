@@ -1,39 +1,39 @@
-# version: "3.9"
+version: "3.9"
 
-# services:
+services:
 
-#   app:
-#     build:
-#       context: .
-#       dockerfile: Dockerfile
-#     container_name: app-next
-#     ports:
-#       - "3030:3030"
-#     restart: unless-stopped
-#     depends_on:
-#       - postgres
-#     environment:
-#       DATABASE_URL: postgres://usermozforms:passmozforms@postgres:5432/mozforms
-#     networks:
-#       - app-net
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app-next
+    ports:
+      - "3030:3030"
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://usermozforms:passmozforms@postgres:5432/mozforms
+    networks:
+      - app-net
 
-#   postgres:
-#     image: bitnami/postgresql:latest
-#     container_name: db-postgres
-#     ports:
-#       - "5432:5432"
-#     environment:
-#       POSTGRESQL_USER: usermozforms
-#       POSTGRESQL_PASSWORD: passmozforms
-#       POSTGRESQL_DATABASE: mozforms
-#     volumes:
-#       - mozforms_pg_data:/bitnami/postgresql
-#     networks:
-#       - app-net
+  postgres:
+    image: bitnami/postgresql:latest
+    container_name: db-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRESQL_USER: usermozforms
+      POSTGRESQL_PASSWORD: passmozforms
+      POSTGRESQL_DATABASE: mozforms
+    volumes:
+      - mozforms_pg_data:/bitnami/postgresql
+    networks:
+      - app-net
 
-# volumes:
-#   mozforms_pg_data:
+volumes:
+  mozforms_pg_data:
 
-# networks:
-#   app-net:
-#     driver: bridge
+networks:
+  app-net:
+    driver: bridge
