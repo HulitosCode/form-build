@@ -10,7 +10,7 @@ COPY package.json package-lock.json prisma ./
 RUN npm install
 
 # Copiar o restante da aplicação
-COPY . /app/.
+COPY . .
 # 
 # Rodar geração do Prisma Client e as migrations
 RUN npx prisma generate
