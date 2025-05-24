@@ -28,7 +28,7 @@ export async function syncUserWithDatabase() {
     });
     console.log("user synced with database", dbUser.id);
     return dbUser;
-  } catch {
+  } catch(error) {
     console.error("Error syncing user with database", error);
     return null;
   }

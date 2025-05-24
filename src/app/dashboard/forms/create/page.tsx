@@ -8,7 +8,12 @@ const CreateForms = () => {
         <p className="text-gray-500 mt-1">Design your custom form</p>
       </div>
 
-      <FormBuilder />
+      <FormBuilder initialData={{
+        id: "",
+        title: "",
+        description: "",
+        questions: []
+      }} />
     </div>
   );
 };
