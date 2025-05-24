@@ -10,7 +10,7 @@ const {
   makeStrictEnum,
   Public,
   getRuntime,
-  skip
+  // skip
 } = require('./runtime/index-browser.js')
 
 
